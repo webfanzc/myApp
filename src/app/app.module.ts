@@ -6,9 +6,23 @@ import {AppComponent} from './app.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {FooterComponent} from './footer/footer.component';
 import {SearchComponent} from './search/search.component';
-import {CarouselComponent} from './carousel/carousel.component';
-import {ProductComponent} from './product/product.component';
+import {CarouselComponent} from './home/carousel/carousel.component';
+import {ProductComponent} from './home/product/product.component';
 import {StarsComponent} from './stars/stars.component';
+import {ProductDetailsComponent} from './home/product/product-details/product-details.component';
+import {HomeComponent} from './home/home.component';
+import {Routes, Router, RouterModule} from '@angular/router';
+import {ProductService} from './shared/product.service';
+import {LoggerService} from './shared/logger.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MutiplePipe } from './pipe/mutiple.pipe';
+import { FilterPipe } from './pipe/filter.pipe';
+
+const routerConfig: Routes = [
+  {path: 'home', component: HomeComponent},
+  {path: 'product/:id', component: ProductDetailsComponent},
+  {path: '**', redirectTo: 'home', pathMatch: 'full'}
+];
 
 @NgModule({
   declarations: [
@@ -18,13 +32,23 @@ import {StarsComponent} from './stars/stars.component';
     SearchComponent,
     CarouselComponent,
     ProductComponent,
-    StarsComponent
+    StarsComponent,
+    ProductDetailsComponent,
+    HomeComponent,
+    MutiplePipe,
+    FilterPipe
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(routerConfig),
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ProductService,
+    LoggerService],
+  bootstrap:
+    [AppComponent],
+
 })
 
 export class AppModule {

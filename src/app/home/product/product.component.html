@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-12">
+    <form class="form-group">
+      <input class="form-control" [formControl]="filterProduct" placeholder="请输入商品名称">
+    </form>
+  </div>
+</div>
+<div *ngFor="let product of products | filter:'title':keyword;let i = index;" class='col-lg-4 col-md-4 col-sm-4'>
+  <div class="thumbnail">
+    <img [src]="imgUrl" alt="占位图">
+    <div class="caption">
+      <h4 class="pull-right">{{product.price|mutiple:10|number:'.2-3'}}元</h4>
+      <h4><a (click)="toProduct(products[i].id)">{{product.title}}</a></h4>
+      <p>{{product.desc}}</p>
+      <app-stars [rating]="product.rating"></app-stars>
+    </div>
+  </div>
+</div>
