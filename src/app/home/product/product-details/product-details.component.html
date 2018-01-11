@@ -1,0 +1,32 @@
+<div class="thumbnail">
+  <img [src]="imgUrl" alt="">
+  <h4 class="pull-right">{{ product.price|number:".2-3"}}元</h4>
+  <h4>{{productTitle}}</h4>
+  <p>{{ product.desc }}</p>
+  <div>
+    <p class="pull-right">{{comments.length}}条评论</p>
+    <app-stars [rating]="this.product.rating"></app-stars>
+  </div>
+</div>
+
+<div>
+  <ul class="well">
+    <li class="row col-md-12 commentPanel">
+      <button class="btn btn-success" (click)="isCommentHidden = !isCommentHidden" [hidden]="isCommentHidden">评论</button>
+      <div [hidden]="isCommentHidden">
+        <app-stars [readonly]="false" [(rating)]="newRating"></app-stars>
+        <textarea [(ngModel)]="newComments" class="col-md-12 text"></textarea>
+        <button class="btn btn-primary" (click)="addComment()">发表评论</button>
+      </div>
+      <hr class="col-md-12">
+    </li>
+    <li class="row" *ngFor="let comment of comments">
+      <hr>
+      <div class="col-md-12">
+        <app-stars [rating]="comment.rating"></app-stars>
+        <span class="pull-right">{{'评论人：' + comment.user + ' 评论时间：' + (comment.time|date:'yyyy-MM-dd hh:mm:ss')}}</span>
+        <p>{{comment.content}}</p>
+      </div>
+    </li>
+  </ul>
+</div>

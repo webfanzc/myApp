@@ -1,0 +1,13 @@
+ul{
+  list-style: none;
+}
+.commentPanel{
+  margin-bottom: 20px;
+}
+.btn-success,
+.text{
+  margin-bottom: 10px;
+}
+.text{
+  border-radius: 5px;
+}
